@@ -1,0 +1,1 @@
+gcc -Wall -Wextra -Werror -L/usr/lib -I/usr/lib -L libft/ fdf.c matrix_operations.c trans_matrices.c readfrom.c utility.c render.c plot.c color.c error.c fdf.h -lmlx -lXext -lX11 -lm -lft
