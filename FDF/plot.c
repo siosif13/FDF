@@ -1,13 +1,28 @@
 #include "fdf.h"
 
+typedef struct    s_norm
+{
+	int dx;
+	int sx;
+	int dy;
+	int sy;
+	int err;
+}				t_norm;
+
+void 			norminator_init(t_norm *norm, _2D pos0, _2D pos1)
+{
+	norm->dx = abs(pos1.x-pos0.x);
+ 	norm->sx = pos0.x<pos1.x ? 1 : -1;
+	norm->dy = abs(pos1.y-pos0.y); 
+	norm->sy = pos0.y<pos1.y ? 1 : -1; 
+	norm->err = (norm->dx>norm->dy ? norm->dx : -norm->dy)/2;
+}
+
 void 			draw_line(_2D pos0, _2D pos1, s_data *data, int e2) 
 {
-  int dx = abs(pos1.x-pos0.x);
-  int sx = pos0.x<pos1.x ? 1 : -1;
-  int dy = abs(pos1.y-pos0.y); 
-  int sy = pos0.y<pos1.y ? 1 : -1; 
-  int err = (dx>dy ? dx : -dy)/2;
+  t_norm 	t;
 
+  norminator_init(&t, pos0, pos1);
   if (pos1.x < 0 || pos1.x >= W_WIDTH || pos1.y < 0 || pos1.y >= W_HEIGHT
   	|| pos0.x < 0 || pos0.x >= W_WIDTH || pos0.y < 0 || pos0.y >= W_HEIGHT)
   	return;
@@ -16,17 +31,17 @@ void 			draw_line(_2D pos0, _2D pos1, s_data *data, int e2)
   	data->image.img_adr[W_WIDTH * pos0.y + pos0.x] = data->norme_color;
     if (pos0.x==pos1.x && pos0.y==pos1.y) 
       break;
-    e2 = err;
-    if (e2 >-dx) 
+    e2 = t.err;
+    if (e2 >-t.dx) 
     	{
-    	 err -= dy;
-    	 pos0.x += sx; 
-    	};
-    if (e2 < dy) 
+    	 t.err -= t.dy;
+    	 pos0.x += t.sx; 
+    	}
+    if (e2 < t.dy) 
     	{
-    		err += dx; 
-    		pos0.y += sy; 
-    	};
+    		t.err += t.dx; 
+    		pos0.y += t.sy; 
+    	}
   }
 }
 

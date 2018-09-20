@@ -13,10 +13,9 @@ static	void	print_list()
 	ft_putendl("8.Another purple");
 	ft_putendl("9.A nicer shade of blue :D");
 	ft_putendl("10.Ice Blue");
-	ft_putendl("11.Ganja Green ;)");
-	ft_putendl("12.Lime Green");
-	ft_putendl("13.White");
-	ft_putendl("14.Mint Green");
+	ft_putendl("11.Lime Green");
+	ft_putendl("12.White");
+	ft_putendl("13.Mint Green");
 }
 
 static int		choose_colors(int *a)
@@ -33,10 +32,9 @@ static int		choose_colors(int *a)
 	arr[7] = 0x08031A7;  // Another purple 
 	arr[8] = 0x0236192;   // A nicer shade of blue :D
 	arr[9] = 0x040C1AC;   // Ice blue 
-	arr[10] = 0x000B140;   // Leaf Green 
-	arr[11] = 0x097D700;  // Lime green 
-	arr[12] = 0x0D9D9D6; 	// White 
-	arr[13] = 0x02CD5C4; 	// Mint Green
+	arr[10] = 0x097D700;  // Lime green 
+	arr[11] = 0x0D9D9D6; 	// White 
+	arr[12] = 0x02CD5C4; 	// Mint Green
 	return (arr[*a - 1]);
 }
 static int		*init_color(int c1, int c2, int c3, int c4)
